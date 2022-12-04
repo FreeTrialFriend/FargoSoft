@@ -1,4 +1,4 @@
-from secrets import secrets
+from secrets import secret
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
