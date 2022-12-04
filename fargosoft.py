@@ -1,4 +1,4 @@
-from secrets import secret
+from secrets import secrets
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
@@ -997,4 +997,4 @@ async def on_application_command_error(ctx):
 """
 GPIO.cleanup()
     
-bot.run(secret)
+bot.run(secrets.token)
