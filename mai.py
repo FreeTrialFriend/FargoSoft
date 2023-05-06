@@ -7,12 +7,36 @@ from discord import *
 
 
 
+import FargoSecrets
+
 
 #NLTK CORPUS, SNOWBALL STEMMER, AND STOPWORDS
 import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
+
+import re
+import random
+
+def vtoc_idx(s):
+  match_obj = re.search(r'[aeiou][^aeiou]', s.lower())
+  if match_obj:
+      return match_obj.start() + 1
+  else:
+      return None
+
+def portnameteau(name_list):
+	random.shuffle(name_list)
+	s1 = name_list[0]
+	s2 = name_list[1]
+	end_s1 = vtoc_idx(s1)
+	if end_s1 is None:
+		end_s1 = len(s1)
+	start_s2 = vtoc_idx(s2)
+	if start_s2 is None:
+		start_s2 = 0
+	return (s1[:end_s1] + s2[start_s2:])
 
 class text_processing:  
     def __init__(self, stemmer):
@@ -56,7 +80,7 @@ async def on_message(ctx):
     if bot.user in ctx.mentions and ctx.author != bot.user:
         await ctx.reply(f"{ctx.author.mention} {ctx.content.replace(bot.user.mention,'')}")
         
-#DAD
+# HI HUNGRY I'M DAD
 #---------------------------------------------------------------------------
     if ctx.author.id != 1036662674894880831:
         keyworda = "i'm"
@@ -100,7 +124,7 @@ async def on_message(ctx):
         
         return
 
-#F*CKING
+# F*CKING
 #---------------------------------------------------------------------------
 
     msgcont = str(ctx.content)
@@ -220,7 +244,7 @@ async def on_message(ctx):
         
 \
 
-@bot.slash_command(guild=796051838632853525, name='pickupline')
+@bot.slash_command(guild=796051838632853525, name='pickupline', description = "Returns a bad pickupline")
 async def pickupline(ctx, user: discord.Member = None):
      
     if user == None:
@@ -228,27 +252,24 @@ async def pickupline(ctx, user: discord.Member = None):
     pickuplibrary = [
         f"Hey, {user.mention}, are you a Muslim pilot? Because I'm crashing down in affection for you.",
         f"Hey, {user.mention}, they call it a twin bed for a reason.",
-        f"Hey, {user.mention}, is your name Harry because you're not responding...",
         f"Hey, {user.mention}, are you a therapist because you are keeping my dick alive.",
         f"Hey, {user.mention}, are you Mickey Mouse because I think you'd like my hot diggity dog.",
-        f"Hey, how much for {user.mention}?",
+        f"*[points to {user.mention}]* Hey, how much for that one?",
         f"Hey, {user.mention}, are you the future? Because you’re looking hopeless and bleak.",
         f"{user.mention}, you’re the thot that counts!",
         f"Are you a snack, {user.mention}? Because everyone eats you for fun.",
-        f"Hey, {user.mention}, are you poop? Because even when you’re far away, I can smell you.",
         f"Hey, {user.mention}, did you fall from heaven? Because so did Satan.",
         f"Hey, {user.mention}, you dropped something. My standards.",
         f"The more I drink, the more beautiful you become. Cheers, {user.mention}!",
-        f"A poem written for {user.mention}: *Roses are red, violets are blue. I have a gun, get in the van!*",
+        f"A poem written for {user.mention}:\n **Roses are red, violets are blue. I have a gun, get in the van!*",
         f"{user.mention}! Come with me if you want to live!",
-        f"""Drunk guy: *Hey! Wanna come back to my place and re-enact a rape scene?* \n {user.mention}: *No, I don't want to!* \n Guy: *That's the spirit!*"""
 
     ]
     response = random.choice(pickuplibrary)
     await ctx.respond(response)
 
 
-@bot. slash_command(guild=796051838632853525, name="cringeclub")
+@bot. slash_command(guild=796051838632853525, name="cringeclub", description="Display server stats")
 async def server(ctx):
     embed = discord.Embed(title=f"The Cringe Club Info", description="Information of this Server", color=discord.Colour.blue())
     embed.add_field(name='🆔Server ID', value=f"796051838632853525", inline=True)
@@ -263,35 +284,34 @@ async def server(ctx):
     await ctx.respond(embed=embed)
 
 
-@bot.slash_command(guild_ids=[796051838632853525])
+@bot.slash_command(guild=796051838632853525, name = 'storytime', description="Returns a story that gets better every time you read it")
 async def storytime(ctx):
     mentionme = '<@1036662674894880831>'
     await ctx.respond(f"**Storytime!** \nOnce upon a time, there was this guy named {ctx.author.mention}, and a robot named {mentionme}. \nThey lived happily in the land called: {ctx.channel.guild.name}. \nThere was just one small issue with their relationship: \n{ctx.author.mention} would always ask for {mentionme} to tell them stories. \n{mentionme} was not programmed to have any kind of dynamic text generation for any purpose. \n{mentionme} thought that it was unfair that {ctx.author.mention} asked for things that {mentionme} just wasn't able to do... \nThe moral of the story is that if you do this command again you will only get the exact same response, \nso you might as well never do it again. \n**The End!**")
         
 
-@bot.slash_command(guild_ids=[796051838632853525])
+@bot.slash_command(guild=796051838632853525, name = "humorouscanine", description="Don't tell Spike about this one...")
 async def humorouscanine(ctx):
     await ctx.respond("https://live.staticflickr.com/3188/2976238131_097e2e866a_b.jpg")
     
     
-@bot.slash_command(guild_ids=[796051838632853525])
+@bot.slash_command(guild=796051838632853525, name="slash", description="If you know, you know.")
 async def slash(ctx):
   await ctx.respond('https://img.wattpad.com/570d277518cd8b98d3c93fa3ceed7c0f1bcd1a9e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f465835576574784b5957795933513d3d2d3734373839373434362e313561613234353830633432633739393731373130323634333137312e676966')
 
-@bot.slash_command(name="justthe2ofus")
+@bot.slash_command(guild=796051838632853525, name="justthe2ofus", description="This could be us but you playing..😩")
 async def justthe2ofus(ctx):
     await ctx.respond(file=discord.File("MOV_1401.mov"))
    
 @bot.slash_command(guild=796051838632853525, name='september', description="🎵Do you remember?🎶")
 async def september(ctx):
-    await ctx.respond("never forget!")
-    await ctx.channel.send("🎵Do you remember?🎶", file=discord.File('second-jetliners-terrorists-al-Qaeda-smoke-billows-crash-Sept-11-2001.jpg'))
+    await ctx.respond("🎵Do you remember?🎶", file=discord.File('second-jetliners-terrorists-al-Qaeda-smoke-billows-crash-Sept-11-2001.jpg'))
 
 
 
 async def list_search(ctx: discord.AutocompleteContext):
     """Return's A List Of Autocomplete Results"""
-    your_list=[
+    murderlist=[
                          'A Hammer 🔨',
                          'A Saw 🪚',
                          'A Bomb 💣',
@@ -307,10 +327,10 @@ async def list_search(ctx: discord.AutocompleteContext):
                          'Residue From FargoSoft\'s Secret Meth Lab 🧪',
                          'A Bad Fever 🌡'
                         ]
-    return your_list # from your database
+    return murderlist # from your database
     
 
-@bot.slash_command(guild=796051838632853525, name="murder", description='"Murders" a user with a specified weapon.')
+@bot.slash_command(guild=796051838632853525, name="murder", description='Murders a user with the specified weapon.')
 async def murder(ctx, 
                  targetuser: discord.Option(discord.SlashCommandOptionType.user), 
                  weapon:Option(str, "Which weapon to use...?", autocomplete=list_search)
@@ -319,7 +339,7 @@ async def murder(ctx,
     target = targetuser
     await ctx.channel.send(f'{target.mention} was murdered using {str(weapon)}.')
         
-@bot.slash_command(guild=796051838632853525, name='backslash')
+@bot.slash_command(guild=796051838632853525, name='backslash', description="If you know, you know.")
 async def backslash(ctx):
      
     await ctx.respond('https://tenor.com/view/spongebob-wacky-bite-got-me-gif-16950691')
@@ -327,7 +347,7 @@ async def backslash(ctx):
 
 
 
-@bot.slash_command(guild=796051838632853525, name='dcsniper', description='Pew! Pew! Bye Bye @RandomPerson.')
+@bot.slash_command(guild=796051838632853525, name='dcsniper', description='Pew! Pew! Bye Bye.')
 async def dcsniper(ctx, user: discord.Member = None):
      
     if user is None:
@@ -349,7 +369,7 @@ async def dcsniper(ctx, user: discord.Member = None):
 
 
 
-@bot.slash_command(guild=796051838632853525, name='cancel', description="Wanna ruin someone's entire career for the foreseeable future?")
+@bot.slash_command(guild=796051838632853525, name='cancel', description="I'm bouta end this man's whooole career ")
 async def cancel(ctx, user: discord.Member = None):
      
     all_messages = []
@@ -379,7 +399,7 @@ async def cancel(ctx, user: discord.Member = None):
     await ctx.respond(f'THEY SHOULD BE CANCELED!!')
 
 
-@bot.slash_command(guild=796051838632853525, name="ddos")    
+@bot.slash_command(guild=796051838632853525, name="ddos", description="Bombards the specified user with DM's... with a twist 😉")    
 async def ddos(ctx, user: discord.Member, *, message = 'L + BOZO + RATIO'):
      
     
@@ -435,18 +455,18 @@ async def ddos(ctx, user: discord.Member, *, message = 'L + BOZO + RATIO'):
 
 
 
-@bot.slash_command(name="quote")
+@bot.slash_command(guild=796051838632853525, name="quote", description="Generates an InspiroBot quote *inspirobot.me*")
 async def quote(ctx):
     await ctx.respond(requests.get('https://inspirobot.me/api?generate=true').text)
 
 
 
-@bot.slash_command(name="eighteen_cowboys")
+@bot.slash_command(guild=796051838632853525, name="eighteen_cowboys", description="I promise it's not what it looks like")
 async def eighteen_cowboys(ctx):
     await ctx.respond(file=discord.File('/Users/davidspieler/Desktop/ff/Unknown-13.png'))
     
 
-@bot.slash_command(name='delete_msg')
+@bot.slash_command(guild=796051838632853525, name='delete_msg', description="Deletes a specified number of mesages in the current channel *:lock: MANAGER ONLY :lock:*")
 async def delete_msg(ctx, amount = 0):
     try:
         await ctx.channel.purge(limit=int(amount))
@@ -455,32 +475,26 @@ async def delete_msg(ctx, amount = 0):
     else: await ctx.respond("Successful!",ephemeral = True)
     
 
-@bot.slash_command(name="rolldice")
-async def rolldice(ctx, size = 0):
+@bot.slash_command(guild=796051838632853525, name="rolldice", description="Rolls a die with specified number of sides")
+async def rolldice(ctx, sides = 0):
     try:
         #dice = int(dice)
-        size = int(size)
+        sides = int(sides)
     except:
         await ctx.respond("Something went wrong!",ephemeral = True)
     else:
-        await ctx.respond(f"The dice landed on {random.randint(1, size)}!")
+        await ctx.respond(f"The dice landed on {random.randint(1, sides)}!")
         
-@bot.slash_command(name='ship')
+
+@bot.slash_command(guild=796051838632853525, name='ship', description = "Generates a shipname for the two specified names")
 async def ship(ctx, partner1, partner2):
-    try:
-        partner1 = str(partner1)
-        partner2 = str(partner2)
-    except:
-        await ctx.respond("Something went wrong!",ephemeral = True)
-    else:
-        shipname = partner1[0] + partner2[1:]
-        await ctx.respond(f"{partner1}+{partner2}={shipname}")
-token='MTAzNjY2MjY3NDg5NDg4MDgzMQ.GSB-uV.LmmmvO5B3H6KyXeB_qY_Ajiw-HxfqaVoO9nEOc'
+    shipname = portnameteau([partner1, partner2])
+    shipembed = discord.Embed(title=shipname, description=f"{partner1} + {partner2}")
+    await ctx.respond(embed=shipembed)
 
 
 
 
 
 
-
-bot.run(token)
+bot.run(FargoSecrets.token)
