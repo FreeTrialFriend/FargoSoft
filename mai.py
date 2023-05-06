@@ -505,9 +505,9 @@ async def eighteen_cowboys(ctx):
     await ctx.respond(file=discord.File('/Users/davidspieler/Desktop/ff/Unknown-13.png'))
     
 
-@bot.slash_command(guild=796051838632853525, name='delete_msg', description="Deletes a specified number of mesages in the current channel *:lock: MANAGER ONLY :lock:*")
+@bot.slash_command(guild=796051838632853525, name='purge', description="Deletes a specified number of mesages in the current channel *:lock: MANAGER ONLY :lock:*")
 
-async def delete_msg(ctx, amount = 0):
+async def purge(ctx, amount = 0):
     print(ctx.author.roles)
     if 'Manager' in [role.name for role in ctx.author.roles]:
         try:
