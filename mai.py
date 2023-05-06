@@ -506,13 +506,17 @@ async def eighteen_cowboys(ctx):
     
 
 @bot.slash_command(guild=796051838632853525, name='delete_msg', description="Deletes a specified number of mesages in the current channel *:lock: MANAGER ONLY :lock:*")
+
 async def delete_msg(ctx, amount = 0):
-    try:
-        await ctx.channel.purge(limit=int(amount))
-    except:
-        await ctx.respond("Something went wrong!",ephemeral = True)
-    else: await ctx.respond("Successful!",ephemeral = True)
-    
+    print(ctx.author.roles)
+    if 'Manager' in [role.name for role in ctx.author.roles]:
+        try:
+            await ctx.channel.purge(limit=int(amount))
+        except:
+            await ctx.respond("Something went wrong!",ephemeral = True)
+        else: await ctx.respond("Successful!",ephemeral = True)
+    else:
+        ctx.respond("Insufficiant Rank!",ephemeral = True)
 
 @bot.slash_command(guild=796051838632853525, name="rolldice", description="Rolls a die with specified number of sides")
 async def rolldice(ctx, sides = 0):
