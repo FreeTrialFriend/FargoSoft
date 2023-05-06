@@ -78,7 +78,7 @@ async def on_ready():
 @bot.event
 async def on_message(ctx):
     if bot.user in ctx.mentions and ctx.author != bot.user:
-        await ctx.reply(f"{ctx.author.mention} {ctx.content.replace(bot.user.mention,'')}")
+        await ctx.reply(f"{ctx.content.replace(bot.user.mention,f'{ctx.author.mention}')}")
         
 # HI HUNGRY I'M DAD
 #---------------------------------------------------------------------------
@@ -241,8 +241,47 @@ async def on_message(ctx):
                                 await ctx.reply("<@844314391863230504> really sucks!")
 
             
-        
-\
+
+
+async def list_search(ctx: discord.AutocompleteContext):
+    """Return's A List Of Autocomplete Results"""
+    murderlist=[x.name for x in bot.commands]
+    return murderlist # from your database
+    
+
+#bot.help_command = 
+@bot.slash_command(name="help", description="Help Command")
+async def help(ctx, 
+                 command:Option(str, "Which command?", autocomplete=list_search) = 'all'
+                 ):
+    help_embed = discord.Embed(title="My Bot's Help!")
+    command_names_list = [x.name for x in bot.commands]
+    
+    for i,x in enumerate(bot.commands):
+        if command != 'all' and x.name == command:
+            help_embed.add_field(
+                name=f"/{command}",
+                value=x.description,
+                inline=False
+            )
+            break
+        elif command == 'all':
+            help_embed.add_field(
+                name=f"{i})  /{x}",
+                value=x.description,
+                inline=False
+            )
+            help_embed.add_field(
+            name="Details",
+            value="Type `/help <command name>` for help about that command.",
+            inline=False,
+
+            )
+        else:
+            pass
+
+    await ctx.respond(embed=help_embed)
+
 
 @bot.slash_command(guild=796051838632853525, name='pickupline', description = "Returns a bad pickupline")
 async def pickupline(ctx, user: discord.Member = None):
