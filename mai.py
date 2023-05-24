@@ -531,9 +531,23 @@ async def rolldice(ctx, sides = 0):
 
 @bot.slash_command(guild=796051838632853525, name='ship', description = "Generates a shipname for the two specified names")
 async def ship(ctx, partner1, partner2):
-    shipname = portnameteau([partner1, partner2])
-    shipembed = discord.Embed(title=shipname, description=f"{partner1} + {partner2}")
-    await ctx.respond(embed=shipembed)
+    slashes = [
+        'slash',
+        'backslash',
+        'dash',
+        'ella',
+        'lilly',
+        'lily',
+        'cat'
+    ]
+    if partner1.lower() == "david" and partner2.lower() in slashes:
+        
+        shipembed = discord.Embed(title="Never Gonna Happen", description=f"{partner1} + {partner2}")
+        await ctx.respond(embed=shipembed)
+    else:
+        shipname = portnameteau([partner1, partner2])
+        shipembed = discord.Embed(title=shipname, description=f"{partner1} + {partner2}")
+        await ctx.respond(embed=shipembed)
 
 
 
