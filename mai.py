@@ -75,6 +75,7 @@ bot = Bot(command_prefix='&', intents = intents)
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Child Por..."))
 
+
 @bot.event
 async def on_message(ctx):
     if bot.user in ctx.mentions and ctx.author != bot.user:
@@ -310,17 +311,20 @@ async def pickupline(ctx, user: discord.Member = None):
 
 @bot. slash_command(guild=796051838632853525, name="cringeclub", description="Display server stats")
 async def server(ctx):
-    embed = discord.Embed(title=f"The Cringe Club Info", description="Information of this Server", color=discord.Colour.blue())
-    embed.add_field(name='🆔Server ID', value=f"796051838632853525", inline=True)
-    embed.add_field(name='📆Created On', value=ctx.guild.created_at.strftime("%b %d %Y"), inline=True)
-    embed.add_field(name='👑Owner', value=f"{ctx.guild.owner.mention}", inline=True)
-    embed.add_field(name='👥Members', value=f'{ctx.guild.member_count} Members', inline=True)
-    embed.add_field(name='💬Channels', value=f'{len(ctx.guild.text_channels)} Text | {len(ctx.guild.voice_channels)} Voice', inline=True)
-    embed.add_field(name='🌎Region', value=f'{VoiceRegion.us_east}', inline=True)
-    embed.set_thumbnail(url=ctx.guild.icon.url) 
-    embed.set_footer(text="⭐ • Fargo Soft")    
-    
-    await ctx.respond(embed=embed)
+    try:
+        embed = discord.Embed(title=f"The Cringe Club Info", description="Information of this Server", color=discord.Colour.blue())
+        embed.add_field(name='🆔Server ID', value=f"796051838632853525", inline=True)
+        embed.add_field(name='📆Created On', value=ctx.guild.created_at.strftime("%b %d %Y"), inline=True)
+        embed.add_field(name='👑Owner', value=f"{ctx.guild.owner.mention}", inline=True)
+        embed.add_field(name='👥Members', value=f'{ctx.guild.member_count} Members', inline=True)
+        embed.add_field(name='💬Channels', value=f'{len(ctx.guild.text_channels)} Text | {len(ctx.guild.voice_channels)} Voice', inline=True)
+        embed.add_field(name='🌎Region', value=f'{VoiceRegion.us_east}', inline=True)
+        embed.set_thumbnail(url=ctx.guild.icon.url) 
+        embed.set_footer(text="⭐ • Fargo Soft")    
+        
+        await ctx.respond(embed=embed)
+    except:
+        pass
 
 
 @bot.slash_command(guild=796051838632853525, name = 'storytime', description="Returns a story that gets better every time you read it")
@@ -331,21 +335,30 @@ async def storytime(ctx):
 
 @bot.slash_command(guild=796051838632853525, name = "humorouscanine", description="Don't tell Spike about this one...")
 async def humorouscanine(ctx):
-    await ctx.respond("https://live.staticflickr.com/3188/2976238131_097e2e866a_b.jpg")
-    
+    try:
+        await ctx.respond("https://live.staticflickr.com/3188/2976238131_097e2e866a_b.jpg")
+    except:
+        pass
     
 @bot.slash_command(guild=796051838632853525, name="slash", description="If you know, you know.")
 async def slash(ctx):
-  await ctx.respond('https://img.wattpad.com/570d277518cd8b98d3c93fa3ceed7c0f1bcd1a9e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f465835576574784b5957795933513d3d2d3734373839373434362e313561613234353830633432633739393731373130323634333137312e676966')
-
+  try:
+      await ctx.respond('https://img.wattpad.com/570d277518cd8b98d3c93fa3ceed7c0f1bcd1a9e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f465835576574784b5957795933513d3d2d3734373839373434362e313561613234353830633432633739393731373130323634333137312e676966')
+  except:
+      pass
 @bot.slash_command(guild=796051838632853525, name="justthe2ofus", description="This could be us but you playing..😩")
 async def justthe2ofus(ctx):
-    await ctx.respond(file=discord.File("MOV_1401.mov"))
+    try:
+        await ctx.respond(file=discord.File("MOV_1401.mov"))
+    except:
+        pass
    
 @bot.slash_command(guild=796051838632853525, name='september', description="🎵Do you remember?🎶")
 async def september(ctx):
-    await ctx.respond("🎵Do you remember?🎶", file=discord.File('second-jetliners-terrorists-al-Qaeda-smoke-billows-crash-Sept-11-2001.jpg'))
-
+    try:
+        await ctx.respond("🎵Do you remember?🎶", file=discord.File('second-jetliners-terrorists-al-Qaeda-smoke-billows-crash-Sept-11-2001.jpg'))
+    except:
+        pass
 
 
 async def list_search(ctx: discord.AutocompleteContext):
@@ -380,9 +393,10 @@ async def murder(ctx,
         
 @bot.slash_command(guild=796051838632853525, name='backslash', description="If you know, you know.")
 async def backslash(ctx):
-     
-    await ctx.respond('https://tenor.com/view/spongebob-wacky-bite-got-me-gif-16950691')
-
+    try:
+        await ctx.respond('https://tenor.com/view/spongebob-wacky-bite-got-me-gif-16950691')
+    except:
+        pass
 
 
 
@@ -440,70 +454,74 @@ async def cancel(ctx, user: discord.Member = None):
 
 @bot.slash_command(guild=796051838632853525, name="ddos", description="Bombards the specified user with DM's... with a twist 😉")    
 async def ddos(ctx, user: discord.Member, *, message = 'L + BOZO + RATIO'):
-     
-    
-    chance = random.randint(1,100)
-    dtime=0
-    if chance <=50: 
-        dtime = 150 
-        backfire = False 
-    else: 
-        dtime = 300
-        backfire = True
-    
-    if user.id == bot.user.id: 
-        if ctx.author.id != 844314391863230504:
-            await ctx.respond("TRY ME BITCH!")
-            await user.author.send("TRY ME BITCH!")
+    try:
+        
+        chance = random.randint(1,100)
+        dtime=0
+        if chance <=50: 
+            dtime = 150 
+            backfire = False 
+        else: 
+            dtime = 300
             backfire = True
-            dtime = 600
+        
+        if user.id == bot.user.id: 
+            if ctx.author.id != 844314391863230504:
+                await ctx.respond("TRY ME BITCH!")
+                await user.author.send("TRY ME BITCH!")
+                backfire = True
+                dtime = 600
+            else:
+                newchoice = random.randint(1,5)
+                if newchoice == 3:
+                    backfire = False
+        
+        
+        if backfire:
+            await ctx.respond(f"lol! {ctx.author.mention} got backfired on lmaooo!!!")
+            await user.send("Get backfired on lol")
         else:
-            newchoice = random.randint(1,5)
-            if newchoice == 3:
-                backfire = False
-    
-    
-    if backfire:
-        await ctx.respond(f"lol! {ctx.author.mention} got backfired on lmaooo!!!")
-        await user.send("Get backfired on lol")
-    else:
-        await ctx.respond("Success!")
-        await user.send("Success!!")
-    
-    for i in range(1,dtime):
+            await ctx.respond("Success!")
+            await user.send("Success!!")
+        
+        for i in range(1,dtime):
 
-        if not backfire:
-            await user.send(f"{message} {i}/{dtime}")
-            
-        else:
-            if user.id != bot.user.id:
-                await ctx.author.send(f"L + BOZO + RATIO + GET BACKFIRED ON {i}/{dtime}")
-               
-    for i in range(dtime,dtime*2):
-    
-        if not backfire:
-            await user.send(f"L + BOZO + RATIO {i}/{dtime*2}")
-            
-        else:
-            if user.id != bot.user.id:
-                await ctx.author.send(f"L + BOZO + RATIO + GET BACKFIRED ON {i}/{dtime*2}")
+            if not backfire:
+                await user.send(f"{message} {i}/{dtime}")
                 
-    await ctx.author.send(f"Completed ddos-ing {user.mention}")
-
-
+            else:
+                if user.id != bot.user.id:
+                    await ctx.author.send(f"L + BOZO + RATIO + GET BACKFIRED ON {i}/{dtime}")
+                
+        for i in range(dtime,dtime*2):
+        
+            if not backfire:
+                await user.send(f"L + BOZO + RATIO {i}/{dtime*2}")
+                
+            else:
+                if user.id != bot.user.id:
+                    await ctx.author.send(f"L + BOZO + RATIO + GET BACKFIRED ON {i}/{dtime*2}")
+                    
+        await ctx.author.send(f"Completed ddos-ing {user.mention}")
+    except:
+        pass
 
 
 
 @bot.slash_command(guild=796051838632853525, name="quote", description="Generates an InspiroBot quote *inspirobot.me*")
 async def quote(ctx):
-    await ctx.respond(requests.get('https://inspirobot.me/api?generate=true').text)
-
+    try:
+        await ctx.respond(requests.get('https://inspirobot.me/api?generate=true').text)
+    except:
+        pass
 
 
 @bot.slash_command(guild=796051838632853525, name="eighteen_cowboys", description="I promise it's not what it looks like")
 async def eighteen_cowboys(ctx):
-    await ctx.respond(file=discord.File('/Users/davidspieler/Desktop/ff/Unknown-13.png'))
-    
+    try:
+        await ctx.respond(file=discord.File('Unknown-13.png'))
+    except:
+        pass
 
 @bot.slash_command(guild=796051838632853525, name='purge', description="Deletes a specified number of mesages in the current channel *:lock: MANAGER ONLY :lock:*")
 
