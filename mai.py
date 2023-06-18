@@ -382,7 +382,7 @@ async def list_search(ctx: discord.AutocompleteContext):
                         ]
     return murderlist # from your database
 
-@bot.slash_command(name="giveMod", description="IYKYK")
+@bot.slash_command(name="givemod", description="IYKYK")
 async def giveMod(ctx):
     await ctx.respond("ERROR: This command could not be completed!")
 
