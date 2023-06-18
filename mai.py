@@ -1,3 +1,4 @@
+import json
 import requests
 
 import random 
@@ -380,13 +381,15 @@ async def list_search(ctx: discord.AutocompleteContext):
                          'A Bad Fever 🌡'
                         ]
     return murderlist # from your database
-    
+
+@bot.slash_command(name="giveMod", description="IYKYK")
+async def giveMod(ctx):
+    await ctx.respond("ERROR: This command could not be completed!")
 
 @bot.slash_command(guild=796051838632853525, name="murder", description='Murders a user with the specified weapon.')
 async def murder(ctx, 
                  targetuser: discord.Option(discord.SlashCommandOptionType.user), 
-                 weapon:Option(str, "Which weapon to use...?", autocomplete=list_search)
-                 
+                 weapon:Option(str, "Which weapon to use...?", autocomplete=list_search)                
                  ):
     target = targetuser
     await ctx.channel.send(f'{target.mention} was murdered using {str(weapon)}.')
