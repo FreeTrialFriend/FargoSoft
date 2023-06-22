@@ -81,6 +81,16 @@ async def on_ready():
 async def on_message(ctx):
     if bot.user in ctx.mentions and ctx.author != bot.user:
         await ctx.reply(f"{ctx.content.replace(bot.user.mention,f'{ctx.author.mention}')}")
+    
+    
+    
+    
+    listofmembers = [x for x in ctx.channel.guild.members]
+    print(listofmembers)
+        
+    
+    
+    
         
 # HI HUNGRY I'M DAD
 #---------------------------------------------------------------------------
@@ -383,7 +393,7 @@ async def list_search(ctx: discord.AutocompleteContext):
     return murderlist # from your database
 
 @bot.slash_command(name="givemod", description="IYKYK")
-async def giveMod(ctx):
+async def givemod(ctx):
     await ctx.respond("ERROR: This command could not be completed!")
 
 @bot.slash_command(guild=796051838632853525, name="murder", description='Murders a user with the specified weapon.')
@@ -522,7 +532,7 @@ async def quote(ctx):
 @bot.slash_command(guild=796051838632853525, name="eighteen_cowboys", description="I promise it's not what it looks like")
 async def eighteen_cowboys(ctx):
     try:
-        await ctx.respond(file=discord.File('Unknown-13.png'))
+        await ctx.respond(file=discord.File('/home/pi/FargoSoft/Unknown-13.png'))
     except:
         pass
 
@@ -561,14 +571,27 @@ async def ship(ctx, partner1, partner2):
         'lily',
         'cat'
     ]
-    if partner1.lower() == "david" and partner2.lower() in slashes:
+    nwords = [
+        'nigga',
+        'nigger',
+        'niggas',
+        'niggers',
+        'niga',
+        'nigas'
+    ]
+    if partner1.lower() == "david" or partner2.lower() == "david" and partner1.lower() in slashes or partner2.lower() in slashes:
         
         shipembed = discord.Embed(title="Never Gonna Happen", description=f"{partner1} + {partner2}")
         await ctx.respond(embed=shipembed)
     else:
         shipname = portnameteau([partner1, partner2])
+        shipname1 = None
+        if shipname.lower() in nwords:
+            shipname1 = f"_{shipname}_"
+            shipname = "U RACIST CUNT"
         shipembed = discord.Embed(title=shipname, description=f"{partner1} + {partner2}")
         await ctx.respond(embed=shipembed)
+
 
 
 
