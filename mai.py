@@ -571,14 +571,7 @@ async def ship(ctx, partner1, partner2):
         'lily',
         'cat'
     ]
-    nwords = [
-        'nigga',
-        'nigger',
-        'niggas',
-        'niggers',
-        'niga',
-        'nigas'
-    ]
+    nwords = FargoSecrets.nwords
     if partner1.lower() == "david" or partner2.lower() == "david" and partner1.lower() in slashes or partner2.lower() in slashes:
         
         shipembed = discord.Embed(title="Never Gonna Happen", description=f"{partner1} + {partner2}")
